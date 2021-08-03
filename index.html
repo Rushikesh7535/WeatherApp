@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Weather Update</title>
+    <!-- Download font awesome cdn -->
+
+    <!-- 
+
+        api.openweathermap.org/data/2.5/weather?q=pune&appid=71be6979fdda99e2dde8cc6abb7995ef
+     -->
+
+
+
+</head>
+<body>
+    <div class="box">
+        <div class="wave -one"></div>
+        <div class="wave -two"></div>
+
+        <div class="wave -three"></div>
+
+        <div id="weathercon">
+            <i class="fas fa-sun" style="color: #eccc68;"></i>
+        </div>
+
+        <div class="info">
+            <h2 class="location"><i class="fas fa-street-view" style="color:  #fff"></i>
+            {%location%},{%country%}
+            </h2>
+
+            <p id="date">WED | JUL 28 | 10:49 AM</p>
+            <h1 class="temp"> {%tempval%} &deg;c</h1>
+            <h3>Min {%tempmin%} &deg;c | Max{%tempmax%} &deg;c</h3>
+        </div>
+
+    </div>
+</body>
+
+<script>
+
+let curDate = document.getElementById("date");
+
+let weathercon = document.getElementById("weathercon");
+
+const tempstatus = "{%tempstatus%}";
+// condition to check weather condition
+    // if(tempstatus = 'sunny'){
+    //     weathercon.innerHTML = '<i class="fas fa-sun" style="color: #eccc68;"></i>';
+    // }else if(tempstatus = 'Clouds'){
+    //     weathercon.innerHTML = '<i class="fas fa-cloud" style="color: #dfe4ea;"></i>';
+    // }else{
+    //     weathercon.innerHTML = '<i class="fas fa-rain" style="color: #a4b0be;"></i>';
+    // }
+
+const getCurrentDay = () =>{
+
+    let weekday = new Array(7);
+    weekday[0]='Sun';
+    weekday[1]='Mon';
+    weekday[2]='Tue';
+    weekday[3]="Wed";
+    weekday[4]='Thu';
+    weekday[5]='Fri';
+    weekday[6]='sat';
+
+    let currentTime = new Date();
+    let Day = weekday[currentTime.getDay()];
+    return Day;
+
+
+};
+
+const getCurrentTime = () => {
+
+    var months = [
+        "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
+    ]
+    var now = new Date();
+    var month = months[now.getMonth()];
+    var date = now.getDate();
+
+    let hours = now.getHours();
+    let mins = now.getMinutes();
+
+    let periods = "AM";
+
+    if(hours > 11){
+        periods = "PM";
+        if(hours > 12){
+            hours -= 12; 
+        }
+    }
+    if(mins < 10){
+        mins = "0"+ mins;
+    }
+    // console.log(`${month} / ${date} and hours ${hours} , min ${mins}`);
+
+    return `  ${month}  ${date}  | ${hours}:${mins} ${periods}`;
+
+};
+
+curDate.innerHTML=  getCurrentDay() + " | "+ getCurrentTime() ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>
